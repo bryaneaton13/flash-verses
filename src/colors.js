@@ -5,6 +5,7 @@ const GREEN = '#24b353';
 const BLACK = '#3a3a3a';
 const DEEP_BLACK = '#000000';
 const GREY = '#8f8c99';
+const LIGHT_GREY = '#bcb3c5';
 const DARK_GREY = '#617d7e';
 
 export default {
@@ -15,6 +16,7 @@ export default {
   DEEP_BLACK,
   WHITE,
   GREY,
+  LIGHT_GREY,
   DARK_GREY,
   TRANSPARENT: 'transparent',
   BACKGROUND: WHITE,
