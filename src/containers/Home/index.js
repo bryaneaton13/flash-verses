@@ -1,50 +1,125 @@
 
 import React, { Component, PropTypes } from 'react';
-import { View } from 'react-native';
+import { View, ListView, Alert, RefreshControl } from 'react-native';
 import { connect } from 'react-redux';
+import Snackbar from 'react-native-snackbar';
 import styles from './styles';
 
-import Text from '../../components/Text';
-import Flex from '../../components/Flex';
+import { removeVerseAction, newSuggestionAction } from '../../actions/verses';
+
+import Header from '../Header';
+import SuggestedVerse from '../SuggestedVerse';
+
+import VerseCard from '../../components/VerseCard';
 
 class Home extends Component { // eslint-disable-line
+
+  constructor(props) {
+    super(props);
+    const ds = new ListView.DataSource({
+      rowHasChanged: (r1, r2) => r1.id !== r2.id || r1.isSuggested !== r2.isSuggested,
+    });
+    this.state = {
+      refreshing: false,
+      dataSource: ds.cloneWithRows(props.verses),
+    };
+
+    this.handleRefresh = this.handleRefresh.bind(this);
+    this.handleRemove = this.handleRemove.bind(this);
+    this.renderRow = this.renderRow.bind(this);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({ dataSource: this.state.dataSource.cloneWithRows(nextProps.verses) });
+  }
+
+  handleRefresh() {
+    this.setState({ refreshing: true });
+    setTimeout(() => {
+      this.props.dispatch(newSuggestionAction());
+      this.setState({ refreshing: false });
+    }, 500);
+  }
+
+  handleRemove(verse) {
+    Alert.alert(
+      'Remove?',
+      `Are you sure you want to remove ${verse.displayLocation} from your list?`,
+      [
+        { text: 'No' },
+        {
+          text: 'Yes',
+          onPress: () => {
+            this.props.dispatch(removeVerseAction(verse));
+
+            Snackbar.show({
+              title: `${verse.displayLocation} has been removed.`,
+              duration: Snackbar.LENGTH_LONG,
+              // TODO: Implement the undo action
+              // action: {
+              //   title: 'UNDO',
+              //   color: 'green',
+              //   onPress: () => {
+              //     console.warn('undo remove');
+              //   },
+              // },
+            });
+          },
+        },
+      ],
+    );
+  }
+
+  renderRow(verse) {
+    if (verse.suggested) {
+      return <SuggestedVerse verse={verse} />;
+    }
+    return (
+      <VerseCard
+        verse={verse}
+        onRemove={() => this.handleRemove(verse)}
+      />
+    );
+  }
+
   render() {
-    const { mine } = this.props;
     return (
       <View style={styles.container}>
-        <View style={styles.header} />
-        <View style={styles.content}>
-          <Text>Hello!</Text>
-          {
-            mine.map((v) => (
-              <Flex direction="column" key={v.id} style={styles.verses}>
-                <Text style={styles.book}>
-                  {v.book} {v.position}
-                </Text>
-                <Text style={styles.text}>
-                  {v.text}
-                </Text>
-                <Text style={styles.translation}>
-                  {v.translation}
-                </Text>
-              </Flex>
-            ))
-          }
-        </View>
+        <Header />
+        <ListView
+          refreshControl={<RefreshControl refreshing={this.state.refreshing} onRefresh={this.handleRefresh} />}
+          initialListSize={4}
+          pageSize={3}
+          style={{ flex: 1 }}
+          enableEmptySections={true}
+          contentContainerStyle={styles.content}
+          dataSource={this.state.dataSource}
+          renderRow={this.renderRow}
+          decelerationRate="fast"
+          scrollsToTop={true}
+        />
       </View>
     );
   }
 }
 
 Home.propTypes = {
-  // dispatch: PropTypes.func.isRequired, // Redux
-  mine: PropTypes.array.isRequired, // Redux
+  dispatch: PropTypes.func.isRequired, // Redux
+  verses: PropTypes.array.isRequired, // Redux
 };
 
 const mapDispatchToProps = (dispatch) => ({ dispatch });
 
-const mapStateToProps = ({ verses }) => ({
-  mine: verses.mine,
-});
+const mapStateToProps = ({ verses }) => {
+  let homeVerses;
+  if (verses.suggested) {
+    homeVerses = [verses.suggested, ...verses.mine];
+  } else {
+    homeVerses = verses.mine;
+  }
+  return {
+    verses: homeVerses,
+  };
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

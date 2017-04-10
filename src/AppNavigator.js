@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import COLORS from './colors';
 
 import Home from './containers/Home/';
+import Drawer from './containers/Drawer/';
 
 class AppNavigator extends Component {
 
@@ -12,6 +13,7 @@ class AppNavigator extends Component {
     super(props);
 
     this.androidBackEvent = this.androidBackEvent.bind(this);
+    this.renderNav = this.renderNav.bind(this);
   }
 
   componentDidMount() {
@@ -32,14 +34,18 @@ class AppNavigator extends Component {
     return <Home />;
   }
 
+  renderNav() {
+    return this.renderScreen();
+  }
+
   render() {
     return (
       <View style={{ flex: 1 }}>
         <StatusBar
           backgroundColor={COLORS.STATUS_BAR}
-          barStyle="default"
+          barStyle="light-content"
         />
-        { this.renderScreen() }
+        <Drawer renderMainContent={this.renderNav} />
       </View>
     );
   }

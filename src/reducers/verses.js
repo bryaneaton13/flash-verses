@@ -1,29 +1,33 @@
 import { REHYDRATE } from 'redux-persist/constants';
-// import { POPULAR } from '../utils/verses';
+import { ADD_VERSE, REMOVE_VERSE, NEW_SUGGESTION } from '../constants';
+import VERSES, { VERSE_COUNT } from '../utils/verses';
 
-const testVerses = [
-  {
-    id: 'psalm251',
-    book: 'psalm',
-    position: '25:1',
-    text: `In you, Lord my God,
-  I put my trust.`,
-    translation: 'niv',
-  },
-  {
-    id: 'psalm271',
-    book: 'psalm',
-    position: '27:1',
-    text: `The Lord is my light and my salvation—
-  whom shall I fear?
-The Lord is the stronghold of my life—
-  of whom shall I be afraid?`,
-    translation: 'niv',
-  },
-];
+function getRandomVerseIndex() {
+  return Math.floor(Math.random() * VERSE_COUNT);
+}
+
+function getSuggested(mine, currentVerse = {}) {
+  const myIds = mine.map((v) => v.id);
+  // Get a random verse (vi) to start incrementing from to check if it already exists in
+  // the user's list. Also only increment through the total length of verses (i)
+  for (let i = 0, vi = getRandomVerseIndex(), l = VERSE_COUNT; i < l; i++, vi++) {
+    let vId = VERSES[vi % l].id;
+    if (vId !== currentVerse.id && myIds.indexOf(vId) === -1) {
+      return {
+        ...VERSES[vi % l],
+        suggested: true,
+      };
+    }
+  }
+  if (currentVerse.id) {
+    return currentVerse;
+  }
+  return null;
+}
 
 const initialState = {
-  mine: testVerses,
+  mine: [],
+  suggested: null,
 };
 
 function versesReducer(state = initialState, action) {
@@ -33,7 +37,29 @@ function versesReducer(state = initialState, action) {
       if (!incoming) return state;
       return {
         ...state,
-        ...incoming,
+        mine: incoming.mine || state.mine,
+        suggested: getSuggested(incoming.mine || state.mine),
+      };
+
+    case ADD_VERSE:
+      const verseToAdd = VERSES.find((v) => action.id === v.id);
+      const addVerses = [...state.mine.filter((v) => v.id !== action.id), verseToAdd];
+      return {
+        ...state,
+        suggested: getSuggested(addVerses),
+        mine: addVerses,
+      };
+
+    case REMOVE_VERSE:
+      return {
+        ...state,
+        mine: state.mine.filter((v) => v.id !== action.id),
+      };
+
+    case NEW_SUGGESTION:
+      return {
+        ...state,
+        suggested: getSuggested(state.mine, state.suggested || undefined),
       };
 
     default:

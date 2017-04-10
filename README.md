@@ -8,6 +8,17 @@ This takes a helpful study technique, flash cards, and applies to Scripture in a
 
 Instead of scrolling through your social media of choice, spend some time investing in your spiritual knowledge so that you're always ready to comfort, communicate, and care for others.
 
+### TODO
+
+- [ ] Implement Toolbar on Android
+- [ ] Implement DrawerLayout on Android
+- [ ] Drawer menu with links
+- [ ] Setup data in a way to have suggested/searchable content
+- [ ] Search page to add new verses
+- [ ] Implement a flash card view
+- [ ] Switch flash card elements
+- [ ] Clean up design
+
 **Created by Bryan Eaton**
 
 **MIT Licensed**

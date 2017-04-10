@@ -19,6 +19,6 @@ export default {
   LIGHT_GREY,
   DARK_GREY,
   TRANSPARENT: 'transparent',
-  BACKGROUND: WHITE,
+  BACKGROUND: '#fcfcfe',
   // STATUS_BAR: '#47d8a9',
 };

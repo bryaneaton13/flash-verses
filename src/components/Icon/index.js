@@ -1,8 +1,11 @@
 import React, { PropTypes } from 'react';
 import { Platform } from 'react-native';
-import FontAwesome, { glyphMap as FAGlyphs } from 'react-native-vector-icons/FontAwesome';
-import Material, { glyphMap as MaterialGlyphs } from 'react-native-vector-icons/MaterialIcons';
-import Ionicons, { glyphMap as IoniconsGlyphs } from 'react-native-vector-icons/Ionicons';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import Material from 'react-native-vector-icons/MaterialIcons';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import FAGlyphs from 'react-native-vector-icons/glyphmaps/FontAwesome.json';
+import MaterialGlyphs from 'react-native-vector-icons/glyphmaps/MaterialIcons.json';
+import IoniconsGlyphs from 'react-native-vector-icons/glyphmaps/Ionicons.json';
 
 const ICON_TYPES = ['Material', 'FontAwesome', 'Ionicons'];
 

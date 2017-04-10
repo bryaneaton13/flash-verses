@@ -3448,6 +3448,10 @@ react-devtools-core@^2.0.8:
     cross-env "^3.1.4"
     ws "^2.0.3"
 
+react-native-snackbar@^0.3.4:
+  version "0.3.4"
+  resolved "https://registry.yarnpkg.com/react-native-snackbar/-/react-native-snackbar-0.3.4.tgz#e3762885135405399790e4bba1f425cd723d89a6"
+
 react-native-vector-icons@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/react-native-vector-icons/-/react-native-vector-icons-4.0.0.tgz#6a2f8f4c6ace613aed7748cd530809283e5b1538"
