@@ -6,7 +6,7 @@ import styles from './styles';
 import Flex from '../../components/Flex';
 import Icon from '../../components/Icon';
 
-class Header extends Component { // eslint-disable-line
+class HeaderHome extends Component { // eslint-disable-line
 
   constructor(props) {
     super(props);
@@ -24,7 +24,7 @@ class Header extends Component { // eslint-disable-line
   }
 }
 
-Header.propTypes = {
+HeaderHome.propTypes = {
   dispatch: PropTypes.func.isRequired, // Redux
   // mine: PropTypes.array.isRequired, // Redux
 };
@@ -35,4 +35,4 @@ const mapStateToProps = ({ verses }) => ({
   mine: verses.mine,
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default connect(mapStateToProps, mapDispatchToProps)(HeaderHome);

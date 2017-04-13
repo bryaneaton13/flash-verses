@@ -5,7 +5,7 @@ import {
   Platform,
 } from 'react-native';
 
-function F8TouchableIOS(props) {
+function TouchableIOS(props) {
   return (
     <TouchableHighlight
       accessibilityTraits="button"
@@ -15,6 +15,15 @@ function F8TouchableIOS(props) {
   );
 }
 
-const F8Touchable = Platform.OS === 'android' ? TouchableNativeFeedback : F8TouchableIOS;
+function TouchableAndroid(props) {
+  return (
+    <TouchableNativeFeedback
+      background={TouchableNativeFeedback.Ripple('rgba(180, 180, 190, 0.5)', false)}
+      {...props}
+    />
+  );
+}
+
+const F8Touchable = Platform.OS === 'android' ? TouchableAndroid : TouchableIOS;
 
 module.exports = F8Touchable;

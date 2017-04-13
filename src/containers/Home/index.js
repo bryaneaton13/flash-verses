@@ -7,9 +7,10 @@ import styles from './styles';
 
 import { removeVerseAction, newSuggestionAction } from '../../actions/verses';
 
-import Header from '../Header';
+import HeaderHome from '../HeaderHome';
 import SuggestedVerse from '../SuggestedVerse';
 
+import { Icon, Touchable } from '../../components/common';
 import VerseCard from '../../components/VerseCard';
 
 class Home extends Component { // eslint-disable-line
@@ -20,9 +21,12 @@ class Home extends Component { // eslint-disable-line
       rowHasChanged: (r1, r2) => r1.id !== r2.id || r1.isSuggested !== r2.isSuggested,
     });
     this.state = {
+      snackbarShowing: false,
       refreshing: false,
       dataSource: ds.cloneWithRows(props.verses),
     };
+
+    this.timeout = null;
 
     this.handleRefresh = this.handleRefresh.bind(this);
     this.handleRemove = this.handleRemove.bind(this);
@@ -55,15 +59,13 @@ class Home extends Component { // eslint-disable-line
             Snackbar.show({
               title: `${verse.displayLocation} has been removed.`,
               duration: Snackbar.LENGTH_LONG,
-              // TODO: Implement the undo action
-              // action: {
-              //   title: 'UNDO',
-              //   color: 'green',
-              //   onPress: () => {
-              //     console.warn('undo remove');
-              //   },
-              // },
             });
+
+
+            // Need to move the button above the snackbar for the time it's showing
+            if (this.timeout) clearTimeout(this.timeout);
+            this.setState({ snackbarShowing: true });
+            this.timeout = setTimeout(() => this.setState({ snackbarShowing: false }), 3000);
           },
         },
       ],
@@ -85,7 +87,7 @@ class Home extends Component { // eslint-disable-line
   render() {
     return (
       <View style={styles.container}>
-        <Header />
+        <HeaderHome />
         <ListView
           refreshControl={<RefreshControl refreshing={this.state.refreshing} onRefresh={this.handleRefresh} />}
           initialListSize={4}
@@ -95,9 +97,12 @@ class Home extends Component { // eslint-disable-line
           contentContainerStyle={styles.content}
           dataSource={this.state.dataSource}
           renderRow={this.renderRow}
-          decelerationRate="fast"
-          scrollsToTop={true}
         />
+        <Touchable onPress={() => console.warn('go to search page')}>
+          <View style={[styles.button, this.state.snackbarShowing ? { bottom: 56 } : null]}>
+            <Icon name="add" style={styles.buttonIcon} />
+          </View>
+        </Touchable>
       </View>
     );
   }

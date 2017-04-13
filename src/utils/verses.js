@@ -22,6 +22,24 @@ The Lord is the stronghold of my life—
     text: `For the wages of sin is death, but the gift of God is eternal life in Christ Jesus our Lord.`,
     translation: 'niv',
   },
+  {
+    book: 'romans',
+    position: '6:25',
+    text: `TODO: Look up Romans 6:25`,
+    translation: 'niv',
+  },
+  {
+    book: 'romans',
+    position: '6:27',
+    text: `TODO: Look up Romans 6:27`,
+    translation: 'esv',
+  },
+  {
+    book: 'romans',
+    position: '62:7',
+    text: `TODO: Look up Romans 6:27`,
+    translation: 'nkjv',
+  },
 ];
 
 function toProperCase(str) {

@@ -6,12 +6,11 @@ module.exports = StyleSheet.create({
   verse: {
     paddingVertical: 10,
     paddingHorizontal: 15,
-    borderWidth: 1,
     backgroundColor: COLORS.WHITE,
-    borderColor: COLORS.GREY,
     marginTop: 10,
     marginHorizontal: 15,
     borderRadius: 7,
+    elevation: 2,
   },
   suggested: {
     backgroundColor: 'rgba(135, 170, 235, 0.3)',

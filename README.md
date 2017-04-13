@@ -10,13 +10,14 @@ Instead of scrolling through your social media of choice, spend some time invest
 
 ### TODO
 
-- [ ] Implement Toolbar on Android
-- [ ] Implement DrawerLayout on Android
-- [ ] Drawer menu with links
+- [*] Implement Toolbar on Android
+- [*] Implement DrawerLayout on Android
+- [*] Drawer menu with links
 - [ ] Setup data in a way to have suggested/searchable content
 - [ ] Search page to add new verses
 - [ ] Implement a flash card view
 - [ ] Switch flash card elements
+- [ ] Settings page
 - [ ] Clean up design
 
 **Created by Bryan Eaton**

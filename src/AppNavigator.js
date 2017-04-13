@@ -5,6 +5,9 @@ import { connect } from 'react-redux';
 import COLORS from './colors';
 
 import Home from './containers/Home/';
+import Flash from './containers/Flash/';
+import Settings from './containers/Settings/';
+
 import Drawer from './containers/Drawer/';
 
 class AppNavigator extends Component {
@@ -13,7 +16,7 @@ class AppNavigator extends Component {
     super(props);
 
     this.androidBackEvent = this.androidBackEvent.bind(this);
-    this.renderNav = this.renderNav.bind(this);
+    this.renderScreen = this.renderScreen.bind(this);
   }
 
   componentDidMount() {
@@ -29,34 +32,35 @@ class AppNavigator extends Component {
   }
 
   renderScreen() {
-    // if (this.props.isLoggedIn) return <Home />;
-    // return <Login />;
-    return <Home />;
-  }
-
-  renderNav() {
-    return this.renderScreen();
+    switch (this.props.location) {
+      case 'flash':
+        return <Flash />;
+      case 'settings':
+        return <Settings />;
+      default:
+        return <Home />;
+    }
   }
 
   render() {
     return (
       <View style={{ flex: 1 }}>
-        <StatusBar
-          backgroundColor={COLORS.STATUS_BAR}
-          barStyle="light-content"
-        />
-        <Drawer renderMainContent={this.renderNav} />
+        <StatusBar backgroundColor={COLORS.STATUS_BAR} />
+        <Drawer mainContent={this.renderScreen()} />
       </View>
     );
   }
 }
 
 AppNavigator.propTypes = {
-  dispatch: PropTypes.func,
+  // dispatch: PropTypes.func.isRequired, // Redux
+  location: PropTypes.string.isRequired, // Redux
 };
 
 const mapDispatchToProps = (dispatch) => ({ dispatch });
 
-const mapStateToProps = () => ({});
+const mapStateToProps = ({ navigation }) => ({
+  location: navigation.location,
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(AppNavigator);
