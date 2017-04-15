@@ -2,7 +2,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
-import { addVerseAction } from '../../actions/verses';
+import { addVerseAction, newSuggestionAction } from '../../actions/verses';
 
 import VerseCard from '../../components/VerseCard';
 
@@ -12,10 +12,15 @@ class SuggestedVerse extends Component { // eslint-disable-line
     super(props);
 
     this.handleAdd = this.handleAdd.bind(this);
+    this.handleSkip = this.handleSkip.bind(this);
   }
 
   handleAdd() {
     this.props.dispatch(addVerseAction(this.props.verse));
+  }
+
+  handleSkip() {
+    this.props.dispatch(newSuggestionAction());
   }
 
   render() {
@@ -26,6 +31,7 @@ class SuggestedVerse extends Component { // eslint-disable-line
         verse={verse}
         suggested={true}
         onAdd={this.handleAdd}
+        onSkip={this.handleSkip}
       />
     );
   }

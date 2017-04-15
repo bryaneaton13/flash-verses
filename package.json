@@ -10,6 +10,7 @@
 		"android:install:release": "adb install android/app/build/outputs/apk/app-release.apk"
 	},
 	"dependencies": {
+		"lodash": "^4.17.4",
 		"react": "16.0.0-alpha.6",
 		"react-native": "^0.43.3",
 		"react-native-snackbar": "^0.3.5",

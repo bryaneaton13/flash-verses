@@ -1,4 +1,5 @@
 import { REHYDRATE } from 'redux-persist/constants';
+import shuffle from 'lodash/shuffle';
 import { ADD_VERSE, REMOVE_VERSE, NEW_SUGGESTION } from '../constants';
 import VERSES, { VERSE_COUNT } from '../utils/verses';
 
@@ -8,13 +9,14 @@ function getRandomVerseIndex() {
 
 function getSuggested(mine, currentVerse = {}) {
   const myIds = mine.map((v) => v.id);
+  const verses = shuffle(VERSES);
   // Get a random verse (vi) to start incrementing from to check if it already exists in
   // the user's list. Also only increment through the total length of verses (i)
   for (let i = 0, vi = getRandomVerseIndex(), l = VERSE_COUNT; i < l; i++, vi++) {
-    let vId = VERSES[vi % l].id;
+    let vId = verses[vi % l].id;
     if (vId !== currentVerse.id && myIds.indexOf(vId) === -1) {
       return {
-        ...VERSES[vi % l],
+        ...verses[vi % l],
         suggested: true,
       };
     }

@@ -2,6 +2,7 @@ const WHITE = '#ffffff';
 const BLUE = '#2d8ee3';
 const RED = '#e45d4e';
 const GREEN = '#24b353';
+const PURPLE = '#9C27B0';
 const BLACK = '#3a3a3a';
 const DEEP_BLACK = '#000000';
 const GREY = '#8f8c99';
@@ -12,6 +13,7 @@ export default {
   BLUE,
   RED,
   GREEN,
+  PURPLE,
   BLACK,
   DEEP_BLACK,
   WHITE,

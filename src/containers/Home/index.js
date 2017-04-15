@@ -90,7 +90,7 @@ class Home extends Component { // eslint-disable-line
         <HeaderHome />
         <ListView
           refreshControl={<RefreshControl refreshing={this.state.refreshing} onRefresh={this.handleRefresh} />}
-          initialListSize={4}
+          initialListSize={6}
           pageSize={3}
           style={{ flex: 1 }}
           enableEmptySections={true}

@@ -15,7 +15,11 @@ module.exports = StyleSheet.create({
   suggested: {
     backgroundColor: 'rgba(135, 170, 235, 0.3)',
   },
+  topWrap: {
+    marginBottom: 3,
+  },
   book: {
+    flex: 1,
     fontWeight: 'bold',
   },
   text: {
@@ -29,10 +33,23 @@ module.exports = StyleSheet.create({
     fontSize: 13,
     color: COLORS.LIGHT_GREY,
   },
+  button: {
+    paddingVertical: 5,
+    paddingHorizontal: 5,
+    backgroundColor: COLORS.TRANSPARENT,
+  },
+  buttonText: {
+    fontSize: 15,
+    fontWeight: 'normal',
+  },
   removeButton: {
     color: COLORS.RED,
   },
   addButton: {
     color: COLORS.GREEN,
+  },
+  skipButton: {
+    color: COLORS.PURPLE,
+    marginHorizontal: 7,
   },
 });
