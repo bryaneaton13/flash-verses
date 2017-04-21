@@ -7,6 +7,7 @@ import COLORS from './colors';
 import Home from './containers/Home/';
 import Flash from './containers/Flash/';
 import Settings from './containers/Settings/';
+import Search from './containers/Search/';
 
 import Drawer from './containers/Drawer/';
 
@@ -37,6 +38,8 @@ class AppNavigator extends Component {
         return <Flash />;
       case 'settings':
         return <Settings />;
+      case 'search':
+        return <Search />;
       default:
         return <Home />;
     }

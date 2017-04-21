@@ -34,9 +34,11 @@ class HeaderBack extends Component { // eslint-disable-line
   }
 
   render() {
+    const { title, ...rest } = this.props;
     return (
       <Icon.ToolbarAndroid
-        title={this.props.title}
+        {...rest}
+        title={title}
         style={styles.header}
         titleColor="white"
         navIconName="arrow-back"

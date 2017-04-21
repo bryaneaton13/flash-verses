@@ -5,7 +5,7 @@ import COLORS from '../../colors';
 module.exports = StyleSheet.create({
   header: {
     height: 52,
-    backgroundColor: COLORS.GREEN,
+    backgroundColor: COLORS.PRIMARY,
     elevation: 4,
   },
 });

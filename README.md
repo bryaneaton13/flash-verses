@@ -13,8 +13,9 @@ Instead of scrolling through your social media of choice, spend some time invest
 - [x] Implement Toolbar on Android
 - [x] Implement DrawerLayout on Android
 - [x] Drawer menu with links
-- [ ] Setup data in a way to have suggested/searchable content
-- [ ] Search page to add new verses
+- [x] Setup data in a way to have suggested/searchable content
+- [x] Search page to add new verses
+- [ ] Connect to API to search for verses
 - [x] Implement a flash card view
 - [ ] Switch flash card elements
 - [ ] Settings page

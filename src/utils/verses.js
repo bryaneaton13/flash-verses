@@ -1,4 +1,7 @@
 /* eslint-disable */
+
+import { toProperCase, removeCharacters } from './helper';
+
 const VERSES = [
   {
     book: 'psalm',
@@ -41,14 +44,6 @@ The Lord is the stronghold of my life—
     translation: 'nkjv',
   },
 ];
-
-function toProperCase(str) {
-  return str.replace(/\w*\S*/g, (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
-}
-
-function removeCharacters(str) {
-  return str.replace(/[^a-zA-Z0-9 ]/g, '');
-}
 
 const FORMATTED_VERSES = VERSES.map((v, index) => ({
   ...v,

@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import Snackbar from 'react-native-snackbar';
 import styles from './styles';
 
+import { goToAction } from '../../actions/navigation';
 import { removeVerseAction, newSuggestionAction } from '../../actions/verses';
 
 import HeaderHome from '../HeaderHome';
@@ -98,7 +99,7 @@ class Home extends Component { // eslint-disable-line
           dataSource={this.state.dataSource}
           renderRow={this.renderRow}
         />
-        <Touchable onPress={() => console.warn('go to search page')}>
+        <Touchable onPress={() => this.props.dispatch(goToAction('search'))}>
           <View style={[styles.button, this.state.snackbarShowing ? { bottom: 56 } : null]}>
             <Icon name="add" style={styles.buttonIcon} />
           </View>
